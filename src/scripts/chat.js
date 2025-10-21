@@ -568,9 +568,12 @@ class ChatUI {
             // Default fallback to page object generation
             if (this.isJavaSelenium(lang, eng)) {
                 promptKeys.push('SELENIUM_JAVA_PAGE_ONLY');
-            }else if (this.isPlaywrightTypescript(lang, eng)) {
+            } else if (this.isPlaywrightTypescript(lang, eng)) {
                 promptKeys.push('Playwright_TypeScript_PAGE_ONLY');
-
+            } else if (this.isCypressTypescript(lang, eng)) {
+                promptKeys.push('Cypress_TypeScript_PAGE_ONLY');
+            } else {
+                this.addUnsupportedLanguageMessage(lang, eng);
             }
             return promptKeys;
         }
@@ -581,7 +584,7 @@ class ChatUI {
             if (this.isJavaSelenium(lang, eng)) {
                 promptKeys.push('CUCUMBER_WITH_SELENIUM_JAVA_STEPS');
             } else {
-                // For non-Java/Selenium combinations, generate separately
+                // For non-Java/Selenium combinations, produce a feature file (Cucumber) but warn about limited support
                 promptKeys.push('CUCUMBER_ONLY');
                 this.addUnsupportedLanguageMessage(lang, eng);
             }
@@ -594,7 +597,9 @@ class ChatUI {
                 promptKeys.push('SELENIUM_JAVA_PAGE_ONLY');
             } else if (this.isPlaywrightTypescript(lang, eng)) {
                 promptKeys.push('Playwright_TypeScript_PAGE_ONLY');
-            }else {
+            } else if (this.isCypressTypescript(lang, eng)) {
+                promptKeys.push('Cypress_TypeScript_PAGE_ONLY');
+            } else {
                 this.addUnsupportedLanguageMessage(lang, eng);
             }
         }
@@ -617,6 +622,10 @@ isPlaywrightTypescript(language, engine) {
 
     isPythonSelenium(language, engine) {
         return language === 'python' && engine === 'selenium';
+    }
+
+     isCypressTypescript(language, engine) {
+        return language === 'ts' && engine === 'cypress';
     }
 
     // typescript/selenium not supported by the selenium webdriver

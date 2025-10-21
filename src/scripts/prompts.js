@@ -43,13 +43,13 @@ export const DEFAULT_PROMPTS = {
   `,
 
   /**
-   * Selenium Java Page Object Prompt (No Test Class)
+   * Playwright Typescript Page Object Prompt (No Test Class)
    */
   Playwright_TypeScript_PAGE_ONLY: `
     Instructions:
     - Generate ONLY a Playwright Typescript Page Object Class (no test code).
     - Add Typescriptdoc for methods & class.
-    - Use Selenium 2.30+ compatible imports.
+    - Use Playwright latest version compatible imports.
     - Use meaningful method names.
     - Do NOT include explanations or test code.
 
@@ -81,6 +81,52 @@ export const DEFAULT_PROMPTS = {
     - Clean, maintainable, enterprise-ready.
   `,
 
+/**
+   * Playwright Typescript Page Object Prompt (No Test Class)
+   */
+  Cypress_TypeScript_PAGE_ONLY: `
+    Instructions:
+    - Generate ONLY a Cypress Typescript Page Object Class (no test code).
+    - Add Typescriptdoc for methods & class.
+    - Use Cypress latest version compatible imports.
+    - Use meaningful method names.
+    - Do NOT include explanations or test code.
+
+    Context:
+    DOM:
+    \`\`\`html
+    \${domContent}
+    \`\`\`
+
+    Example:
+    \`\`\`typescript
+    describe('Google Search Functionality', () => {
+  it('should be able to search for a term and verify results', () => {
+    // Visit Google
+    cy.visit('https://www.google.com');
+
+    // Get the search input field and type a search term
+    cy.get('textarea[name="q"]').type('Cypress TypeScript example');
+
+    // Submit the search (Cypress often handles form submission automatically after typing in an input)
+    cy.get('input[name="btnK"]').first().click(); // Or press Enter after typing
+
+    // Verify that search results are displayed
+    cy.contains('Cypress TypeScript example').should('be.visible');
+    cy.url().should('include', 'search?q=Cypress+TypeScript+example');
+  });
+});
+    \`\`\`
+
+    Persona:
+    - Audience: Automation engineer focusing on maintainable POM structure.
+
+    Output Format:
+    - A single typescript class inside a \`\`\`typescript\`\`\` block.
+
+    Tone:
+    - Clean, maintainable, enterprise-ready.
+  `,
 
   /**
    * Cucumber Feature File Only Prompt
@@ -255,6 +301,7 @@ export function getPrompt(promptKey, variables = {}) {
 export const CODE_GENERATOR_TYPES = {
   SELENIUM_JAVA_PAGE_ONLY: 'Selenium-Java-Page-Only',
   Playwright_TypeScript_PAGE_ONLY: 'Playwright-TypeScript-Page-Only',
+  Cypress_TypeScript_PAGE_ONLY: 'Cypress-TypeScript-Page-Only',
   CUCUMBER_ONLY: 'Cucumber-Only',
   CUCUMBER_WITH_SELENIUM_JAVA_STEPS: 'Cucumber-With-Selenium-Java-Steps',
 };
