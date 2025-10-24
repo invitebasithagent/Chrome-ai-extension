@@ -42,6 +42,60 @@ export const DEFAULT_PROMPTS = {
     - Clean, maintainable, enterprise-ready.
   `,
 
+  TEST_DATA_GENERATION: `
+    Instructions:
+    - Act as an expert QA automation engineer specializing in test data generation. Create comprehensive test data for UI automation testing of a [specific application/feature/Selected DOM element].
+
+**Application Context:**
+- Application type: [e-commerce, banking, healthcare, SaaS, etc.]
+- Key features: [list main features]
+- Target users: [describe user personas]
+
+
+
+**Specific Fields to Generate:**
+[List specific form fields, data types, and constraints]
+
+**Additional Requirements:**
+- Ensure data realism and business logic compliance
+- Include both positive and negative test cases
+- Consider performance testing data volumes
+- Support data-driven testing frameworks
+
+    Context:
+    DOM:
+    \`\`\`html
+    \${domContent}
+    \`\`\`
+
+    Example:
+    \`\`\` Test Data Set Example
+  1. Test Case ID: TC_001
+     Input Data:
+       - Username: "testuser"
+       - Password: "P@ssw0rd!"
+       - Email: "
+    Generate [10] test cases covering:
+  - Valid data scenarios (happy paths)
+  - Invalid data scenarios (edge cases, boundary values)
+  - Special character inputs
+  - Data format variations
+  - Localization/internationalization data
+    \`\`\`
+
+    Persona:
+    - Audience: Automation engineer focusing on maintainable POM structure.
+
+    Output Format:
+    - JSON format with nested structures
+- Include both input data and expected validation results
+- Separate files for different test scenarios
+- Include data relationships and dependencies
+
+    Tone:
+    - Clean, maintainable, enterprise-ready.
+  `,
+
   /**
    * Playwright Typescript Page Object Prompt (No Test Class)
    */
@@ -304,4 +358,5 @@ export const CODE_GENERATOR_TYPES = {
   Cypress_TypeScript_PAGE_ONLY: 'Cypress-TypeScript-Page-Only',
   CUCUMBER_ONLY: 'Cucumber-Only',
   CUCUMBER_WITH_SELENIUM_JAVA_STEPS: 'Cucumber-With-Selenium-Java-Steps',
+  TEST_DATA_GENERATION: 'Test-Data-Generation'
 };
